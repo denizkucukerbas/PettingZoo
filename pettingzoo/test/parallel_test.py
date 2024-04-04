@@ -31,6 +31,7 @@ def sample_action(
     model,
 ) -> ActionType:
     agent_obs = obs[agent]
+    print(type(agent_obs))
     print(f"Agent: {agent}, Observation: {agent_obs}")
 
     if isinstance(agent_obs, dict) and "observation" in agent_obs:
