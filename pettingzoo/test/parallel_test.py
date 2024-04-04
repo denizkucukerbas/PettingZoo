@@ -27,8 +27,8 @@ from pettingzoo.utils.wrappers import BaseWrapper
 def sample_action(
     env: ParallelEnv[AgentID, ObsType, ActionType],
     obs: dict[AgentID, ObsType],
-    model: trained_model,
     agent: AgentID,
+    model,
 ) -> ActionType:
     agent_obs = obs[agent]
     if isinstance(agent_obs, dict) and "action_mask" in agent_obs:
@@ -39,9 +39,8 @@ def sample_action(
     return model.predict(agent_obs, deterministic=True)[0]
 
 
-def parallel_api_test(par_env: ParallelEnv, num_cycles=1000, model = trained_model):
+def parallel_api_test(par_env: ParallelEnv, num_cycles=1000, model = None):
     par_env.max_cycles = num_cycles
-    trained_model = trained_model
 
     if not hasattr(par_env, "possible_agents"):
         warnings.warn(missing_attr_warning.format(name="possible_agents"))
@@ -69,7 +68,7 @@ def parallel_api_test(par_env: ParallelEnv, num_cycles=1000, model = trained_mod
         has_finished = set()
         for _ in range(num_cycles):
             actions = {
-                agent: sample_action(par_env, obs, agent, trained_model)
+                agent: sample_action(par_env, obs, agent, model)
                 for agent in par_env.agents
                 if (
                     (agent in terminated and not terminated[agent])
