@@ -37,7 +37,7 @@ def sample_action(
     print(len(agent_obs))
     print(len(agent))
     print(len(obs))
-    print(agent_obs[f"agent"])
+    print(agent_obs['agent_0'])
     print(f"Agent: {agent}, Observation: {agent_obs}")
     print("Observation: ", agent_obs)
     #box_observations = {}
