@@ -27,7 +27,7 @@ from pettingzoo.utils.wrappers import BaseWrapper
 def sample_action(
     env: ParallelEnv[AgentID, ObsType, ActionType],
     obs: dict[AgentID, ObsType],
-    model: trained_model
+    model: trained_model,
     agent: AgentID,
 ) -> ActionType:
     agent_obs = obs[agent]
