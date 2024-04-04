@@ -31,6 +31,13 @@ def sample_action(
     model,
 ) -> ActionType:
     agent_obs = obs[agent]
+    print(f"Agent: {agent}, Observation: {agent_obs}")
+
+    if isinstance(agent_obs, dict) and "observation" in agent_obs:
+        # Extract the actual observation data that the model expects
+        agent_obs = agent_obs["observation"]
+        print(f"Extracted Observation for Agent: {agent}: {agent_obs}")
+
     if isinstance(agent_obs, dict) and "action_mask" in agent_obs:
         legal_actions = np.flatnonzero(agent_obs["action_mask"])
         if len(legal_actions) == 0:
