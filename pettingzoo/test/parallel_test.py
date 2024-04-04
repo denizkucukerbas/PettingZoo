@@ -32,10 +32,17 @@ def sample_action(
 ) -> ActionType:
     agent_obs = obs[agent]
     print(type(agent_obs))
+    print(type(agent))
+    print(type(obs))
+    print(len(agent_obs))
+    print(len(agent))
+    print(len(obs))
     print(f"Agent: {agent}, Observation: {agent_obs}")
+    print("Observation: ", agent_obs)
     #box_observations = {}
-    for i in range(len(agent_obs)):
-      print(type(agent_obs.get(f"agent{i}")))
+    #for i in range(len(agent_obs)):
+     # print
+     # print(type(agent_obs[f"agent{i}"]))
 
     if isinstance(agent_obs, dict) and "observation" in agent_obs:
         # Extract the actual observation data that the model expects
