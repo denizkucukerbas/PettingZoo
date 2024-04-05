@@ -31,32 +31,13 @@ def sample_action(
     model,
 ) -> ActionType:
     agent_obs = obs[agent]
-    #print(type(agent_obs))
-    #print(type(agent))
-    #print(type(obs))
-    #print(len(agent_obs))
-    #print(len(agent))
-    #print(len(obs))
-    #print(type(agent_obs['agent_0']))
-    #print(f"Agent: {agent}, Observation: {agent_obs}")
-    #print("Observation: ", agent_obs)
-    #box_observations = {}
-    #for i in range(len(agent_obs)):
-     # print
-     # print(type(agent_obs[f"agent{i}"]))
-
-    if isinstance(agent_obs, dict) and "observation" in agent_obs:
-        # Extract the actual observation data that the model expects
-        agent_obs = agent_obs["observation"]
-
-        print(f"Extracted Observation for Agent: {agent}: {agent_obs}")
 
     if isinstance(agent_obs, dict) and "action_mask" in agent_obs:
         legal_actions = np.flatnonzero(agent_obs["action_mask"])
         if len(legal_actions) == 0:
             return 0
-        return model.predict(agent_obs['agent_0'], deterministic=True)[0]
-    return model.predict(agent_obs['agent_0'], deterministic=True)[0]
+        return model.predict(agent_obs, deterministic=True)[0]
+    return model.predict(agent_obs, deterministic=True)[0]
 
 
 def parallel_api_test(par_env: ParallelEnv, num_cycles=1000, model = None):
